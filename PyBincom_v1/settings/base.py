@@ -14,7 +14,12 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -37,8 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'blogpost',
+    'widget_tweaks',
+    'userprofile',
     'company',
+    'blog_v1',
+
     #'lecture',
 ]
 
@@ -57,7 +65,7 @@ ROOT_URLCONF = 'PyBincom_v1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+'\\templates'],
+        'DIRS': [BASE_DIR+'\\templates',BASE_DIR+'\\home\\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,4 +133,7 @@ MEDIA_URL = '/media/'
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR,'static','static-only')
     MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static','media')
-    STATICFILES_DIR = [os.path.join(BASE_DIR, 'static','static','general'),]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'general_static_files',),]
+#'static','general'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -1,0 +1,25 @@
+{% extends 'home/index.html' %}
+{% load mathfilters %}
+{% block content %}
+    <div class="container">
+        {% for i,j  in words.items %}
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                            <div class="card-header">{{i}}{{' letters'}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Warning card title</h5>
+                                <p class="card-text">{% for k  in j %} {{k }} <br> {% endfor %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+
+                </div>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}

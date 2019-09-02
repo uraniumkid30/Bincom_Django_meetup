@@ -1,6 +1,8 @@
 import string
 import random
-
+import json
+from nltk.corpus import words as wn
+from PyBincom_v1.settings import BASE_DIR
 class UniqueIdentifiers:
 
     @classmethod
@@ -27,3 +29,49 @@ class UniqueIdentifiers:
             str3 = (''.join(random.choice(NUMSEQ) for _ in range(n2)))
             return (str1 + str2 +str3)
         return main(n1,n2,text)
+
+class WordGame:
+    def __init__(self,word):
+        with open('dictionary.json') as jf:
+            json_data = json.load(jf)
+            self.dic_words = list(json_data.keys())
+        self.dict_words = {i.lower() for i in self.dic_words}
+        self.nltk_words = set(list(wn.words()))
+        self.word = word.lower()
+
+    def newguy(self,l, newword=[]):
+        holder = []
+        word2 = list(l)
+        if newword:
+            for r in newword:
+                counter = [i for i in r]
+                for j in counter:
+                    word2.remove(j)
+                for jj in word2:
+                    holder.append(r + jj)
+                word2 = (list(l))
+        else:
+            for a in range(len(l)):
+                word2.remove(l[a])
+                for i in word2:
+                    holder.append(l[a] + i)
+                word2 = list(l)
+        return holder
+
+    def allwords(self):
+
+        self.finalwords = []
+        for i in range(len(self.word) - 1):
+            if i == 0:
+                newword = self.newguy(self.word)
+            else:
+                newword = self.newguy(self.word, newword)
+            for i in newword:
+                self.finalwords.append(i)
+
+    def actualwords(self):
+        print(self.finalwords)
+        td2 = sorted(set(self.finalwords).intersection(self.nltk_words))
+        y, z = min(map(len, td2)), max(map(len, td2)) + 1
+        self.bank2 = {i: (lambda i: [j for j in td2 if len(j) == i])(i) for i in range(y, z)}
+

@@ -1,0 +1,34 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron" >
+                    <h1 class="display-4">Open Weather </h1>
+                    <p class="lead"> dont let the rain catch you unawares while wearing that nice suit,
+                    get updated on the current weather and the weather for tomorrow</p>
+                    <hr class="my-4">
+                    <p>the weather changes everytime, we suggest you come here more often to get updated</p>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron" >
+                    <h1 class="display-4">Word Puzzle</h1>
+                    <p class="lead"> Word game is an addictive and educative game that  allows you to
+                    create words from random letters you supply</p>
+                    <hr class="my-4">
+                    <p>This game is free and it has a dictionary to help you with meanings of words</p>
+                    <a class="btn btn-primary btn-lg" href="{% url 'home:wordgame' %}" role="button">Learn more</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

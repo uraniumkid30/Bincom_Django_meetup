@@ -1,0 +1,33 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="card mb-3 text-center">
+                    <img src="{% static 'static/general/img/word.jpg' %}"  class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title">Word Game</h3>
+                        <p class="card-text">This fun game requires you to type in the letters
+                            from which you want to form words from</p>
+                        <h4 class="card-text"><small class="text-muted">have fun !</small></h4>
+                        <form method="post" action="{% url 'home:wordgameresult' %}">
+                            {% csrf_token %}
+                            {% include 'home/general_form.html' with form=form %}
+                            <button type="submit" class="btn btn-primary">Create Words</button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="alert alert-info" role="alert">
+                            1000 users are currently playing this game
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+    </div>
+{% endblock %}
+

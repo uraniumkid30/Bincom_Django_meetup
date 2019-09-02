@@ -9,8 +9,10 @@ import site_utils
 class UserprofileV1(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     profileid = models.CharField(max_length=100,unique=True,)
-    country = models.CharField(max_length=100,unique=True,)
-    phone_no = models.IntegerField(default=3344556677)
+    country = models.CharField(max_length=100,blank=True,)
+    phone_no = models.BigIntegerField(default=3344556677)
+    is_verified = models.BooleanField(default=False)
+    profile_completed = models.BooleanField(default=False)
     birthday = models.DateField(null=True,blank=True)
     picture = models.ImageField(upload_to='user_image',blank=True,null=True)
 
@@ -24,7 +26,7 @@ class UserprofileV1(models.Model):
 
 
 @receiver(post_save,sender=User)
-def create_or_update_user_profile(sender,instance,created,**kwargs):
+def create_or_update_user_profile(sender,instance,**kwargs):
     if kwargs['created']:
         UserprofileV1.objects.create(user=instance,profileid=site_utils.UniqueIdentifiers.createToken(4,12))
 

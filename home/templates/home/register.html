@@ -1,0 +1,14 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1> Registration</h1>
+        {% include 'home/messagess.html' %}
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'home/general_form.html' with form=form %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+{% endblock %}

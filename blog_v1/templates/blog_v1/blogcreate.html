@@ -1,0 +1,13 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+    <div class="container">
+        <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_ul }}
+            <input type="submit" name="submit">
+
+        </form>
+    </div>
+{% endblock %}
+

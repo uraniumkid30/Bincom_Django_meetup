@@ -1,0 +1,12 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+    <div class="container">
+
+            <h1> {{ post.title }} </h1>
+            <p> {{ post.description }}</p>
+            <p> {{ post.slug }}</p>
+            <img src={{ post.image.url }} width="200px" height="200px">
+
+    </div>
+{% endblock %}
