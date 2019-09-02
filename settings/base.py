@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from decouple import config, Csv
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -37,8 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'blogpost',
+    'widget_tweaks',
+    'mathfilters',
+    'userprofile',
     'company',
+    'blog_v1',
+
     #'lecture',
 ]
 
@@ -57,7 +66,7 @@ ROOT_URLCONF = 'PyBincom_v1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+'\\templates'],
+        'DIRS': [BASE_DIR+'\\templates',BASE_DIR+'\\home\\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,12 +86,29 @@ WSGI_APPLICATION = 'PyBincom_v1.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+
+    'default':{
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'pybincom_v1',
+        'USER':'root',
+        'PASSWORD':'Emerald2018',
+        'HOST':'localhost',
+        'PORT':'3306'
+    }
+    # pip install django mysqlclient
+}
+'''#'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+    },
+    'posty':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'',
+        'USER':'',
+        'PASSWORD':'',
+        'HOST':'',
+        'PORT':'5432'
+    },'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -120,9 +146,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
-#MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR,'static','static-only')
-    #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static','media')
-    STATICFILES_DIR = [os.path.join(BASE_DIR, 'static','static','general'),]
+    MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static','media')
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'general_static_files',),]
+#'static','general'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

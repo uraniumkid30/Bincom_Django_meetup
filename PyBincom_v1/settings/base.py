@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'mathfilters',
     'userprofile',
     'company',
     'blog_v1',
@@ -85,12 +86,29 @@ WSGI_APPLICATION = 'PyBincom_v1.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+
+    'default':{
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'pybincom_v1',
+        'USER':'root',
+        'PASSWORD':'Emerald2018',
+        'HOST':'localhost',
+        'PORT':'3306'
+    }
+    # pip install django mysqlclient
+}
+'''#'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+    },
+    'posty':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'',
+        'USER':'',
+        'PASSWORD':'',
+        'HOST':'',
+        'PORT':'5432'
+    },'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
